@@ -1,0 +1,89 @@
+<app-sidebar></app-sidebar>
+
+          <!-- Page title-->
+          <div class="border-bottom pt-5 mt-2 mb-5">
+            <h1 class="mt-2 mt-md-4 mb-3 pt-5">Clientes</h1>
+            <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+              <p class="text-muted">Este módulo lista todos los clientes de la tienda.</p>
+
+            </div>
+          </div>
+
+
+          <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+
+          <div class="card box-shadow-sm">
+                <div class="card-header">
+                    <h5 style="margin-bottom: 0px;">Update Customer</h5>
+                </div>
+                <ng-container *ngIf="load_data">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <div class="spinner-grow text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </ng-container>
+                <ng-container *ngIf="!load_data">
+                  <div class="card-body" *ngIf="customer!=undefined">
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">First Name</label>
+                        <input class="form-control" type="text" placeholder="First name" required name="firstName" [(ngModel)]="customer.name">
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">Last Name</label>
+                        <input class="form-control" type="text" placeholder="Last Name" required name="lastName" [(ngModel)]="customer.lastName">
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">Email</label>
+                        <input class="form-control" type="email" placeholder="Email" required name="email" [(ngModel)]="customer.email">
+                      </div>
+
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">Phone</label>
+                        <input class="form-control" type="text" placeholder="phone" required name="phone" [(ngModel)]="customer.phone">
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">Birth Date</label>
+                        <input class="form-control" type="date" required name="birthDate" [(ngModel)]="customer.birthDate">
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label for="validationCustom01" class="form-label">DNI</label>
+                        <input class="form-control" type="number" placeholder="DNI" required name="dni" [(ngModel)]="customer.dni">
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="validationCustom01" class="form-label" >Genre</label>
+                        <select class="form-control custom-select" name="genre" [(ngModel)]="customer.genre">
+                          <option value="" disabled selected>Select</option>
+                          <option value="Masculino">Male</option>
+                          <option value="Femenino">Female</option>
+                        </select>
+                      </div>
+                    </div>
+
+              </div>
+              <div class="card-body" *ngIf="customer==undefined">
+                <h3 class="text-center">Not found registers</h3>
+                <div class="row">
+                  <div class="col-3 mx-auto">
+                    <img src="assets/img/error.png" alt="error image" style="width: 100%;">
+                  </div>
+                </div>
+              </div>
+                </ng-container>
+
+                <div class="card-footer">
+                    <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Update</button>
+                    <!-- Button with growing spinner and text -->
+                    <button *ngIf="load_btn" type="button" class="btn btn-secondary" disable>
+                      <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
+                    <a [routerLink]="['/panel/customers']" class="btn btn-warning">back</a>
+                </div>
+          </div>
+        </form>
